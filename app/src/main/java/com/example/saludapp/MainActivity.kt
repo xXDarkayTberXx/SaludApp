@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
     @SuppressLint("WrongViewCast")
@@ -16,7 +17,12 @@ class MainActivity : AppCompatActivity() {
         val etName: AppCompatEditText = findViewById(R.id.etname)
         btnHello.setOnClickListener {
             val name = etName.text.toString()
-            Toast.makeText(this, "Hola $name!", Toast.LENGTH_LONG).show()
+            if (name.isNotEmpty()) {
+                Snackbar.make(btnHello, "Hola $name!", Snackbar.LENGTH_SHORT)
+                    .setAnchorView(btnHello)
+                    .setAction("CLOSE") { etName.setText(null) }
+                    .show()
+            }
         }
     }
 }
