@@ -1,6 +1,7 @@
 package com.example.saludapp
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -17,12 +18,9 @@ class MainActivity : AppCompatActivity() {
         val etName: AppCompatEditText = findViewById(R.id.etname)
         btnHello.setOnClickListener {
             val name = etName.text.toString()
-            if (name.isNotEmpty()) {
-                Snackbar.make(btnHello, "Hola $name!", Snackbar.LENGTH_SHORT)
-                    .setAnchorView(btnHello)
-                    .setAction("CLOSE") { etName.setText(null) }
-                    .show()
-            }
+            val intentGA = Intent(this, GreetingActivity::class.java)
+            intentGA.putExtra("EXTRA_NAME", name)
+            startActivity(intentGA)
         }
     }
 }
